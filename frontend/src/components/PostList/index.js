@@ -26,10 +26,6 @@ class PostsList extends Component {
 			sortByTimestamp,
 		} = this.props;
 
-		if (isFetching && !posts.length) {
-			return <p>Loading posts...</p>;
-		}
-
 		return (
 			<div>
 				<div>
@@ -41,17 +37,23 @@ class PostsList extends Component {
 						Recent
 					</button>
 				</div>
-				<ul>
-					{posts.map((post) => (
-						<Post
-							key={post.id}
-							handleIncrement={incrementPostScore}
-							handleDecrement={decrementPostScore}
-							handleDelete={deletePost}
-							{...post}
-						/>
-					))}
-				</ul>
+
+				{isFetching && !posts.length
+					? (<p>Loading posts...</p>)
+					: (
+						<ul>
+							{posts.map((post) => (
+								<Post
+									key={post.id}
+									handleIncrement={incrementPostScore}
+									handleDecrement={decrementPostScore}
+									handleDelete={deletePost}
+									{...post}
+								/>
+							))}
+						</ul>
+					)
+				}
 			</div>
 		);
 	}
