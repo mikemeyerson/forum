@@ -39,6 +39,10 @@ import * as postSelectors from './posts';
 // 	}
 // };
 
+export const getPostById = (state, id) => {
+	return postSelectors.getPostById(state.posts, id);
+};
+
 export const getVisiblePosts = (state, category) => {
 	return postSelectors.getVisiblePosts(state.posts, category);
 };

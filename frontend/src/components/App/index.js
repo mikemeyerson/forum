@@ -5,6 +5,7 @@ import PostList from '../PostList';
 import PostDetails from '../PostDetails';
 import AddPost from '../AddPost';
 
+// TODO: Check if withRouter is necessary for PostList and AddPost
 const App = () => (
 	<div>
 		<NavBar />

@@ -20,14 +20,19 @@ class CategoryList extends Component {
 
 	render() {
 		const { categories, activeStyle } = this.props;
+		const showAll = {
+			name: 'All',
+			path: 'all'
+		};
+		const categoriesToRender = [showAll, ...categories];
 
 		return (
 			<div>
-				<NavLink to="/all" activeStyle={activeStyle}>
-					All
-				</NavLink>{" "}
-				{categories.map((cat) => (
-					<NavLink to={cat.path}>
+				{categoriesToRender.map((cat) => (
+					<NavLink
+						to={`/${cat.path}`}
+						activeStyle={activeStyle}
+					>
 						{capitalizeEach(cat.name)}{" "}
 					</NavLink>
 				))}
@@ -44,7 +49,7 @@ const mapDispatchToProps = {
 	fetchCategories: actions.fetchCategories
 };
 
-export default connect(
+export default withRouter(connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CategoryList);
+)(CategoryList));

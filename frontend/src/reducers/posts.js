@@ -88,6 +88,12 @@ const sortMethods = {
 // TODO: Reorganize posts by filter? change .filter()
 
 // Selectors
+export const getPostById = (state, id) => {
+	const post = state.byId[id] || {};
+
+	return !post.deleted && post;
+};
+
 export const getVisiblePosts = (state, category) => {
 	return state.allIds
 		.filter(id => !state.byId[id].deleted && (state.byId[id].category === category || category === 'all'))

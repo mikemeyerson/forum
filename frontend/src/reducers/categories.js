@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
 	FETCH_CATEGORIES_SUCCESS
 } from '../actions/categories';
