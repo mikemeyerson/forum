@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Post from './Post';
+import { withRouter } from 'react-router-dom';
+import Post from '../Post';
 import {
 	getVisiblePosts,
 	getIsFetching
-} from '../reducers';
-import * as actions from '../actions/posts';
+} from '../../reducers';
+import * as actions from '../../actions/posts';
 
 class PostsList extends Component {
 	// TODO: try nested Route for sort
@@ -23,7 +23,7 @@ class PostsList extends Component {
 			decrementPostScore,
 			deletePost,
 			sortByVoteScore,
-			sortByTimestamp
+			sortByTimestamp,
 		} = this.props;
 
 		if (isFetching && !posts.length) {
@@ -57,10 +57,14 @@ class PostsList extends Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	isFetching: getIsFetching(state),
-	posts: getVisiblePosts(state)
-});
+const mapStateToProps = (state, { match }) => {
+	const category = match.params.category
+
+	return {
+		isFetching: getIsFetching(state),
+		posts: getVisiblePosts(state, category)
+	}
+};
 
 const mapDispatchToProps = {
 	fetchPosts: actions.fetchPosts,
@@ -71,9 +75,9 @@ const mapDispatchToProps = {
 	sortByTimestamp: actions.sortByTimestamp
 };
 
-PostsList = connect(
+PostsList = withRouter(connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(PostsList);
+)(PostsList));
 
 export default PostsList;

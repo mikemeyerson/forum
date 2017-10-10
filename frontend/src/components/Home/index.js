@@ -1,9 +1,10 @@
 import React from 'react';
-import PostsList from '../PostsList';
+import PostList from '../PostList';
+import CategoryList from '../CategoryList';
 
 const Home = () => (
 	<div>
-		<PostsList />
+		<PostList />
 	</div>
 );
 

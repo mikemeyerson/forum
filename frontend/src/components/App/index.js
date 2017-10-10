@@ -1,13 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import NavBar from '../NavBar';
 import Home from '../Home';
 import AddPost from '../AddPost';
 
-// TODO: fix category in url
 const App = () => (
 	<div>
-		<Route exact path="/" component={Home} />
-		<Route exact path="/add" component={AddPost} />
+		<NavBar />
+		<hr />
+		<Switch>
+			<Route exact path="/add" component={AddPost} />
+			<Route path="/:category" component={Home} />
+			<Redirect from="/" to="/all"  />
+		</Switch>
 	</div>
 );
 

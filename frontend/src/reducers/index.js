@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import categoriesReducer from './categories';
+import * as categorySelectors from './categories';
 import postsReducer from './posts';
 import * as postSelectors from './posts';
 
@@ -37,30 +39,20 @@ import * as postSelectors from './posts';
 // 	}
 // };
 
-/*{
-	"categories": [{
-		"name": "react",
-		"path": "react"
-	}, {
-		"name": "redux",
-		"path": "redux"
-	}, {
-		"name": "udacity",
-		"path": "udacity"
-	}]
-}*/
-
-
-export const getVisiblePosts = (state) => {
-	return postSelectors.getVisiblePosts(state.posts);
+export const getVisiblePosts = (state, category) => {
+	return postSelectors.getVisiblePosts(state.posts, category);
 };
 
 export const getIsFetching = (state) => {
 	return postSelectors.getIsFetching(state.posts);
 };
 
+export const getCategories = (state) => {
+	return categorySelectors.getCategories(state.categories);
+};
+
 export default combineReducers({
 	/*comments,*/
 	posts: postsReducer,
-	/*categories*/
+	categories: categoriesReducer
 });

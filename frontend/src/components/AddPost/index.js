@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { v4 } from 'uuid';
 import * as moment from 'moment';
-import { addPost } from '../actions/posts';
+import { addPost } from '../../actions/posts';
 
 
 
@@ -33,7 +34,7 @@ class AddPost extends Component {
 	};
 
 	submitForm = (event) => {
-		const { addPost } = this.props;
+		const { addPost, history } = this.props;
 		const { title, author, body } = this.state;
 		const newPost = {
 			title,
@@ -47,12 +48,7 @@ class AddPost extends Component {
 		event.preventDefault();
 
 		addPost(newPost);
-
-		this.setState({
-			title: '',
-			author: '',
-			body: ''
-		});
+		history.push('/');
 	};
 
 	render() {
@@ -87,7 +83,11 @@ class AddPost extends Component {
 	}
 }
 
-export default connect(
-	null,
+const mapStateToProps = (state, { history }) => ({
+	history
+});
+
+export default withRouter(connect(
+	mapStateToProps,
 	{ addPost }
-)(AddPost);
+)(AddPost));

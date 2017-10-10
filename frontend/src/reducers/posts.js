@@ -10,22 +10,6 @@ import {
 	SORT_BY_TIMESTAMP
  } from '../actions/posts';
 
-// posts: {
-// 	byId: {
-// 		pid1: {
-// 			timestamp: "",
-// 			title: "",
-// 			body: "",
-// 			author: "",
-// 			category: "name1",
-// 			voteScore: 1,
-// 			deleted: false,
-// 			comments: ["cid1"]
-// 		}
-// 	}
-// 	allIds: ['pid1']
-// },
-
 const byId = (state = {}, action) => {
 	switch (action.type) {
 		case FETCH_POSTS_SUCCESS:
@@ -41,6 +25,21 @@ const byId = (state = {}, action) => {
 			return state;
 	}
 };
+
+// const createCategoryList = (category) => (state = [], action) => {
+// 	if (category !== action.category && category !== 'all') {
+// 		return state;
+// 	}
+//
+// 	switch (action.type) {
+// 		case FETCH_POSTS_SUCCESS:
+// 			return action.response.result;
+// 		case ADD_POST_SUCCESS:
+// 			return [...state, action.response.result];
+// 		default:
+// 			return state;
+// 	}
+// };
 
 const allIds = (state = [], action) => {
 	switch (action.type) {
@@ -65,7 +64,7 @@ const isFetching = (state = false, action) => {
 
 };
 
-const sort = (state = 'sortByVoteScore', action) => {
+const sort = (state = 'byVoteScore', action) => {
 	switch (action.type) {
 		case SORT_BY_VOTE_SCORE:
 			return 'byVoteScore';
@@ -86,10 +85,12 @@ const sortMethods = {
 	}
 };
 
+// TODO: Reorganize posts by filter? change .filter()
+
 // Selectors
-export const getVisiblePosts = (state) => {
+export const getVisiblePosts = (state, category) => {
 	return state.allIds
-		.filter(id => !state.byId[id].deleted)
+		.filter(id => !state.byId[id].deleted && (state.byId[id].category === category || category === 'all'))
 		.map(id => state.byId[id])
 		.sort(sortMethods[state.sort]);
 };
