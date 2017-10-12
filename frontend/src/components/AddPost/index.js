@@ -1,93 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { v4 } from 'uuid';
-import * as moment from 'moment';
+import { some, isEmpty, isInteger } from 'lodash';
 import { addPost } from '../../actions/posts';
+import Form from '../Form';
 
+const AddPost = ({ addPost, history }) => {
 
-
-class AddPost extends Component {
-	// TODO: Add category, remove hard-coding
-	state = {
-		title: '',
-		author: '',
-		body: ''
-	};
-
-	handleTitle = (event) => {
-		this.setState({
-			title: event.target.value
-		});
-	};
-
-	handleAuthor = (event) => {
-		this.setState({
-			author: event.target.value
-		});
-	};
-
-	handleBody = (event) => {
-		this.setState({
-			body: event.target.value
-		});
-	};
-
-	submitForm = (event) => {
-		const { addPost, history } = this.props;
-		const { title, author, body } = this.state;
+	const submitForm = (post) => {
 		const newPost = {
-			title,
-			author,
-			body,
+			...post,
 			id: v4(),
-			timestamp: moment(),
-			category: 'udacity'
+			timestamp: Date.now()
 		};
 
-		event.preventDefault();
+		// TODO: Add error message
+		if (some(newPost, (val) => isEmpty(val) && !isInteger(val))) {
+			return;
+		}
 
 		addPost(newPost);
 		history.push('/');
 	};
 
-	render() {
-		return (
-			<form>
-				<input
-					type="text"
-					placeholder="Title"
-					onChange={this.handleTitle}
-					value={this.state.title}
-				/>
-				<input
-					type="text"
-					placeholder="Author"
-					onChange={this.handleAuthor}
-					value={this.state.author}
-				/>
-				<input
-					type="text"
-					placeholder="Write message here..."
-					onChange={this.handleBody}
-					value={this.state.body}
-				/>
-				<button
-					type="submit"
-					onClick={this.submitForm}
-				>
-					Add Post
-				</button>
-			</form>
-		);
-	}
+	return (
+		<Form onSubmit={submitForm} />
+	);
 }
 
-const mapStateToProps = (state, { history }) => ({
-	history
-});
-
-export default withRouter(connect(
-	mapStateToProps,
+export default connect(
+	null,
 	{ addPost }
-)(AddPost));
+)(AddPost);

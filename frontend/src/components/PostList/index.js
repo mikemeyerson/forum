@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import Post from '../Post';
 import {
 	getVisiblePosts,
@@ -21,7 +20,6 @@ class PostsList extends Component {
 			isFetching,
 			incrementPostScore,
 			decrementPostScore,
-			deletePost,
 			sortByVoteScore,
 			sortByTimestamp,
 		} = this.props;
@@ -47,7 +45,6 @@ class PostsList extends Component {
 									key={post.id}
 									handleIncrement={incrementPostScore}
 									handleDecrement={decrementPostScore}
-									handleDelete={deletePost}
 									{...post}
 								/>
 							))}
@@ -72,14 +69,13 @@ const mapDispatchToProps = {
 	fetchPosts: actions.fetchPosts,
 	incrementPostScore: actions.incrementPostScore,
 	decrementPostScore: actions.decrementPostScore,
-	deletePost: actions.deletePost,
 	sortByVoteScore: actions.sortByVoteScore,
 	sortByTimestamp: actions.sortByTimestamp
 };
 
-PostsList = withRouter(connect(
+PostsList = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(PostsList));
+)(PostsList);
 
 export default PostsList;

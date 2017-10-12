@@ -57,8 +57,7 @@ export const addPost = (post) => makePostRequest('posts', post);
 
 export const fetchPosts = () => makeGetRequest('posts');
 
-// title & body strings
-export const updatePost = (id) => makePutRequest(`posts/${id}`);
+export const editPost = (post) => makePutRequest(`posts/${post.id}`, post);
 
 export const incrementPostScore = (id) =>
 	makePostRequest(`posts/${id}`, { option: 'upVote' });

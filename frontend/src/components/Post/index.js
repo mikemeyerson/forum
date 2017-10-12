@@ -14,23 +14,11 @@ class Post extends Component {
 			timestamp,
 			category,
 			handleIncrement,
-			handleDecrement,
-			handleDelete
+			handleDecrement
 		} = this.props;
 
 		return (
 			<div className="post">
-				<div>
-					<button>
-						Edit
-					</button>
-					<button onClick={() => handleDelete(id)}>
-						Delete
-					</button>
-					<button>
-						Reply
-					</button>
-				</div>
 				<Link to={`${category}/${id}`}>{title} by {author}</Link>
 				<p>{body}</p>
 				<p>{moment(timestamp).format('MM/D/YYYY hh:mm:ss')}</p>

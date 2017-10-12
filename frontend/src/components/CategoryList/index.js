@@ -1,41 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { capitalize } from 'lodash';
 import {
 	getCategories
 } from '../../reducers';
 import * as actions from '../../actions/categories';
 
-const capitalizeEach = (str) =>
-	str.split(' ')
+const capitalizeEach = (cat) => ({
+	...cat,
+	name: cat.name
+		.split(' ')
 		.map(capitalize)
-		.join(' ');
-
+		.join(' ')
+});
 
 class CategoryList extends Component {
 	componentDidMount() {
 		this.props.fetchCategories();
 	}
 
+	// TODO: Make visibleCategories a selector
 	render() {
-		const { categories, activeStyle } = this.props;
-		const showAll = {
+		const { categories, showAll } = this.props;
+		const all = {
 			name: 'All',
 			path: 'all'
 		};
-		const categoriesToRender = [showAll, ...categories];
+		let visibleCategories = showAll ? [all, ...categories] : categories;
+		visibleCategories = visibleCategories.map(capitalizeEach);
 
 		return (
 			<div>
-				{categoriesToRender.map((cat) => (
-					<NavLink
-						to={`/${cat.path}`}
-						activeStyle={activeStyle}
-					>
-						{capitalizeEach(cat.name)}{" "}
-					</NavLink>
-				))}
+				{this.props.render(visibleCategories)}
 			</div>
 		);
 	}

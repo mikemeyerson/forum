@@ -5,6 +5,7 @@ import {
 	ADD_POST_SUCCESS,
 	INCREMENT_POST_SCORE_SUCCESS,
 	DECREMENT_POST_SCORE_SUCCESS,
+	EDIT_POST_SUCCESS,
 	DELETE_POST_SUCCESS,
 	SORT_BY_VOTE_SCORE,
 	SORT_BY_TIMESTAMP
@@ -17,6 +18,7 @@ const byId = (state = {}, action) => {
 		case INCREMENT_POST_SCORE_SUCCESS:
 		case DECREMENT_POST_SCORE_SUCCESS:
 		case DELETE_POST_SUCCESS:
+		case EDIT_POST_SUCCESS:
 			return {
 				...state,
 				...action.response.entities.posts

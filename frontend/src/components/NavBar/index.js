@@ -9,12 +9,23 @@ const activeStyle = {
 	cursor: 'text'
 };
 
+const renderCategories = (categories) =>
+	categories.map((cat) => (
+		<NavLink
+			key={cat.path}
+			to={`/${cat.path}`}
+			activeStyle={activeStyle}
+		>
+			{cat.name}{" "}
+		</NavLink>
+	));
+
 const NavBar = () => (
 	<nav className="links">
 		<NavLink to="/add" activeStyle={activeStyle}>
 			Add Post
 		</NavLink>
-		<CategoryList activeStyle={activeStyle} />
+		<CategoryList showAll={true} render={renderCategories}/>
 	</nav>
 );
 

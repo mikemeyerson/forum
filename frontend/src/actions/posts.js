@@ -21,8 +21,8 @@ export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
 export const SORT_BY_VOTE_SCORE = 'SORT_BY_VOTE_SCORE';
 export const SORT_BY_TIMESTAMP = 'SORT_BY_TIMESTAMP';
 
-export const EDIT_POST = 'EDIT_POST';
-
+export const EDIT_POST_REQUEST = 'EDIT_POST_REQUEST';
+export const EDIT_POST_SUCCESS = 'EDIT_POST_SUCCESS';
 
 
 export const fetchPosts = () => (dispatch, getState) => {
@@ -54,7 +54,20 @@ export const addPost = (post) => (dispatch) => {
 			response: normalize(response, schema.post)
 		});
 	});
-}
+};
+
+export const editPost = (post) => (dispatch) => {
+	dispatch({
+		type: EDIT_POST_REQUEST
+	});
+
+	return api.editPost(post).then((response) => {
+		dispatch({
+			type: EDIT_POST_SUCCESS,
+			response: normalize(response, schema.post)
+		});
+	});
+};
 
 export const incrementPostScore = (id) => (dispatch) => {
 	dispatch({
@@ -83,7 +96,7 @@ export const decrementPostScore = (id) => (dispatch) => {
 };
 
 // TODO: Figure out if only need to set deleted flag
-// OR remove from byId and allIds
+// OR remove from state.byId and state.allIds
 export const deletePost = (id) => (dispatch) => {
 	dispatch({
 		type: DELETE_POST_REQUEST
