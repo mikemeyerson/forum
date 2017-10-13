@@ -9,7 +9,11 @@ import {
 	DELETE_POST_SUCCESS,
 	SORT_BY_VOTE_SCORE,
 	SORT_BY_TIMESTAMP
- } from '../actions/posts';
+} from '../actions/posts';
+import {
+	FETCH_COMMENTS_BY_POST_SUCCESS,
+	ADD_COMMENT_SUCCESS
+} from '../actions/comments';
 
 const byId = (state = {}, action) => {
 	switch (action.type) {
@@ -23,6 +27,25 @@ const byId = (state = {}, action) => {
 				...state,
 				...action.response.entities.posts
 			};
+		// case FETCH_COMMENTS_BY_POST_SUCCESS:
+		// 	return {
+		// 		...state,
+		// 		[action.parentId]: {
+		// 			...state[action.parentId],
+		// 			comments: action.response.result
+		// 		}
+		// 	};
+		// case ADD_COMMENT_SUCCESS:
+		// 	console.info('current comments', state[action.parentId].comments);
+		// 	return {
+		// 		...state,
+		// 		[action.parentId]: {
+		// 			...state[action.parentId],
+		// 			comments: state[action.parentId].comments
+		// 				? [...state[action.parentId].comments, action.response.result]
+		// 				: [action.response.result]
+		// 		}
+		// 	};
 		default:
 			return state;
 	}
@@ -96,7 +119,7 @@ export const getPostById = (state, id) => {
 	return !post.deleted && post;
 };
 
-export const getVisiblePosts = (state, category) => {
+export const getPosts = (state, category) => {
 	return state.allIds
 		.filter(id => !state.byId[id].deleted && (state.byId[id].category === category || category === 'all'))
 		.map(id => state.byId[id])

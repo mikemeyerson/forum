@@ -18,20 +18,20 @@ class PostDetails extends Component {
 	};
 
 	render() {
-		const { post } = this.props;
+		const { post, match } = this.props;
 
 		return (
 			<div>
 				<div>
-					<Link to={`/edit/${post.id}`}>
+					<Link to={`${match.url}/edit`}>
 						<button>Edit</button>
 					</Link>
 					<button onClick={() => this.handleDelete(post.id)}>
 						Delete
 					</button>
-					<button>
-						Reply
-					</button>
+					<Link to={`${match.url}/reply`}>
+						<button>Reply</button>
+					</Link>
 				</div>
 				<p>ID: {post.id}</p>
 				<p>Title: {post.title}</p>
@@ -44,7 +44,7 @@ class PostDetails extends Component {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-	post: getPostById(state, ownProps.match.params.id)
+	post: getPostById(state, ownProps.match.params.postId)
 });
 
 const mapDispatchToProps = {

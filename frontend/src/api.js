@@ -51,11 +51,19 @@ const makeDeleteRequest = (path) =>
 		return json;
 	});
 
-// TODO: add comment API's
+// TODO: Use fetchPostById for EditPost and PostDetails
 
-export const addPost = (post) => makePostRequest('posts', post);
+export const fetchCategories = () => makeGetRequest('categories');
+
+// Posts API
 
 export const fetchPosts = () => makeGetRequest('posts');
+
+export const fetchPostById = (postId) => makeGetRequest(`posts/${postId}`);
+
+export const fetchPostsByCategory = (category) => makeGetRequest(`${category}/posts`);
+
+export const addPost = (post) => makePostRequest('posts', post);
 
 export const editPost = (post) => makePutRequest(`posts/${post.id}`, post);
 
@@ -67,6 +75,20 @@ export const decrementPostScore = (id) =>
 
 export const deletePost = (id) => makeDeleteRequest(`posts/${id}`);
 
-export const fetchPostsForCategory = (category) => makeGetRequest(`${category}/posts`);
+// Comments API
 
-export const fetchCategories = () => makeGetRequest('categories');
+export const fetchCommentsByPostId = (postId) => makeGetRequest(`posts/${postId}/comments`);
+
+export const fetchCommentById = (commentId) => makeGetRequest(`comments/${commentId}`);
+
+export const addComment = (comment) => makePostRequest(`comments`, comment);
+
+export const editComment = (comment) => makePutRequest(`comments/${comment.id}`, comment);
+
+export const incrementCommentScore = (commentId) =>
+	makePostRequest(`comments/${commentId}`, { option: 'upVote' });
+
+export const decrementCommentScore = (commentId) =>
+	makePostRequest(`comments/${commentId}`, { option: 'downVote' });
+
+export const deleteComment = (commentId) => makeDeleteRequest(`comments/${commentId}`);

@@ -1,62 +1,34 @@
 import { combineReducers } from 'redux';
 import categoriesReducer from './categories';
-import * as categorySelectors from './categories';
+import { getCategories } from './categories';
 import postsReducer from './posts';
 import * as postSelectors from './posts';
+import commentsReducer from './comments';
+import { getComments } from './comments';
 
-// const exampleState = {
-// 	categories: {
-// 		name1: {
-// 			path: "thing",
-// 			posts: ["pid1"]
-// 		}
-// 	},
-// 	posts: {
-// 		byId: {
-// 			pid1: {
-// 				timestamp: "",
-// 				title: "",
-// 				body: "",
-// 				author: "",
-// 				category: "name1",
-// 				voteScore: 1,
-// 				deleted: false,
-// 				comments: ["cid1"]
-// 			}
-// 		},
-// 		allIds: ['pid1']
-// 	},
-// 	comments: {
-// 		cid1: {
-// 			parentId: "pid1",
-// 			timestamp: "",
-// 			body: "",
-// 			author: "",
-// 			voteScore: 1,
-// 			deleted: false,
-// 			parentDeleted: false
-// 		}
-// 	}
-// };
-
+// TODO: Remove this once we fetch individual post
 export const getPostById = (state, id) => {
 	return postSelectors.getPostById(state.posts, id);
 };
 
+export const getVisibleComments = (state, postId) => {
+	return getComments(state.comments, postId);
+};
+
 export const getVisiblePosts = (state, category) => {
-	return postSelectors.getVisiblePosts(state.posts, category);
+	return postSelectors.getPosts(state.posts, category);
 };
 
 export const getIsFetching = (state) => {
 	return postSelectors.getIsFetching(state.posts);
 };
 
-export const getCategories = (state) => {
-	return categorySelectors.getCategories(state.categories);
+export const getVisibleCategories = (state) => {
+	return getCategories(state.categories);
 };
 
 export default combineReducers({
-	/*comments,*/
+	comments: commentsReducer,
 	posts: postsReducer,
 	categories: categoriesReducer
 });

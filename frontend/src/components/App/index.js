@@ -5,6 +5,7 @@ import PostList from '../PostList';
 import PostDetails from '../PostDetails';
 import AddPost from '../AddPost';
 import EditPost from '../EditPost';
+import AddComment from '../AddComment';
 
 const App = () => (
 	<div>
@@ -12,9 +13,10 @@ const App = () => (
 		<hr />
 		<Switch>
 			<Route exact path="/add" component={AddPost} />
-			<Route exact path="/edit/:id" component={EditPost} />
 			<Route exact path="/:category" component={PostList} />
-			<Route path ="/:category/:id" component={PostDetails} />
+			<Route exact path="/:category/:postId" component={PostDetails} />
+			<Route exact path="/:category/:postId/edit" component={EditPost} />
+			<Route exact path="/:category/:postId/reply" component={AddComment} />
 			<Redirect from="/" to="/all"  />
 		</Switch>
 	</div>

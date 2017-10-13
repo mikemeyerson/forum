@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
-import { some, isEmpty, isInteger } from 'lodash';
 import { addPost } from '../../actions/posts';
 import Form from '../Form';
 
@@ -11,13 +10,9 @@ const AddPost = ({ addPost, history }) => {
 		const newPost = {
 			...post,
 			id: v4(),
-			timestamp: Date.now()
+			timestamp: Date.now(),
+			comments: []
 		};
-
-		// TODO: Add error message
-		if (some(newPost, (val) => isEmpty(val) && !isInteger(val))) {
-			return;
-		}
 
 		addPost(newPost);
 		history.push('/');

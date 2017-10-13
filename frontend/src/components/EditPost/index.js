@@ -22,7 +22,8 @@ class EditPost extends Component {
 	render() {
 		const { post } = this.props;
 		const disabledFields = [
-			'author'
+			'author',
+			'category'
 		];
 
 		return (
@@ -36,7 +37,7 @@ class EditPost extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	post: getPostById(state, ownProps.match.params.id)
+	post: getPostById(state, ownProps.match.params.postId)
 });
 
 export default connect(

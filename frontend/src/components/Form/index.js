@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isEmpty, includes } from 'lodash';
+import { isEmpty, includes, some, difference } from 'lodash';
 import CategoryList from '../CategoryList';
 
 class Form extends Component {
@@ -34,7 +34,9 @@ class Form extends Component {
 	};
 
 	handleSubmit = (event) => {
-		const { onSubmit } = this.props;
+		event.preventDefault();
+
+		const { onSubmit, disabledFields } = this.props;
 		const { title, author, body, category } = this.state;
 		const post = {
 			title,
@@ -42,8 +44,12 @@ class Form extends Component {
 			body,
 			category
 		};
+		const fieldsToValidate = difference(Object.keys(post), disabledFields);
 
-		event.preventDefault();
+		if (some(fieldsToValidate, (field) => isEmpty(this.state[field]))) {
+			return;
+		}
+
 		onSubmit(post);
 	};
 
@@ -60,6 +66,8 @@ class Form extends Component {
 
 	render() {
 		const { disabledFields } = this.props;
+		const numBodyRows = 8;
+		const numBodyCols = 70;
 
 		return (
 			<form>
@@ -80,8 +88,9 @@ class Form extends Component {
 					/>
 				)}
 				{!includes(disabledFields, 'body') && (
-					<input
-						type="text"
+					<textarea
+						rows={numBodyRows}
+						cols={numBodyCols}
 						placeholder="Write message here..."
 						onChange={this.setValue('body')}
 						value={this.state.body}

@@ -18,8 +18,6 @@ class PostsList extends Component {
 		const {
 			posts,
 			isFetching,
-			incrementPostScore,
-			decrementPostScore,
 			sortByVoteScore,
 			sortByTimestamp,
 		} = this.props;
@@ -41,12 +39,7 @@ class PostsList extends Component {
 					: (
 						<ul>
 							{posts.map((post) => (
-								<Post
-									key={post.id}
-									handleIncrement={incrementPostScore}
-									handleDecrement={decrementPostScore}
-									{...post}
-								/>
+								<Post key={post.id} {...post} />
 							))}
 						</ul>
 					)
@@ -67,8 +60,6 @@ const mapStateToProps = (state, { match }) => {
 
 const mapDispatchToProps = {
 	fetchPosts: actions.fetchPosts,
-	incrementPostScore: actions.incrementPostScore,
-	decrementPostScore: actions.decrementPostScore,
 	sortByVoteScore: actions.sortByVoteScore,
 	sortByTimestamp: actions.sortByTimestamp
 };

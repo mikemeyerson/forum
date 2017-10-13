@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash';
 import {
 	FETCH_CATEGORIES_SUCCESS
 } from '../actions/categories';
@@ -12,7 +13,13 @@ const categories = (state = [], action) => {
 };
 
 export const getCategories = (state) => {
-	return state;
+	return state.map((cat) => ({
+		...cat,
+		name: cat.name
+			.split(' ')
+			.map(capitalize)
+			.join(' ')
+	}));
 };
 
 export default categories;
