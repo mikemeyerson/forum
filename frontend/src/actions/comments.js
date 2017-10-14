@@ -94,7 +94,7 @@ export const decrementCommentScore = (commentId) => (dispatch) => {
 		type: DECREMENT_COMMENT_SCORE_REQUEST
 	});
 
-	return api.incrementCommentScore(commentId).then((response) => {
+	return api.decrementCommentScore(commentId).then((response) => {
 		dispatch({
 			type: DECREMENT_COMMENT_SCORE_SUCCESS,
 			response: normalize(response, schema.comment)
