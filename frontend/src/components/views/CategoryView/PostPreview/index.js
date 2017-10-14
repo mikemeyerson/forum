@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Panel } from 'react-bootstrap';
 import * as moment from 'moment';
 import Counter from '../../../shared/Counter';
-import './PostPreview.css';
 import { getVisibleComments } from '../../../../reducers';
 import { fetchCommentsByPostId } from '../../../../actions/comments';
 
@@ -20,19 +20,20 @@ class PostPreview extends Component {
 			id,
 			title,
 			author,
-			body,
 			timestamp,
 			category
 		} = post;
+		const formattedTime = moment(timestamp).format('MM/D/YYYY hh:mm:ss');
 
 		return (
-			<div className="post">
-				<Link to={`${category}/${id}`}>{title} by {author}</Link>
-				<p>{body}</p>
-				<p>{moment(timestamp).format('MM/D/YYYY hh:mm:ss')}</p>
+			<Panel>
+				<Link to={`${category}/${id}`}>
+					<h4>{title}</h4>
+				</Link>
+				<p>{`submitted by ${author} at ${formattedTime}`}</p>
 				<p>{comments.length} comments</p>
 				<Counter msg={post} />
-			</div>
+			</Panel>
 		);
 	}
 }

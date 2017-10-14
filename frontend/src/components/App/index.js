@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import NavBar from './NavBar';
+import Menu from './Menu';
 import CategoryView from '../views/CategoryView';
 import PostDetailView from '../views/PostDetailView';
 import AddPost from '../views/AddPost';
@@ -10,8 +10,7 @@ import EditComment from '../views/EditComment';
 
 const App = () => (
 	<div>
-		<NavBar />
-		<hr />
+		<Menu />
 		<Switch>
 			<Route exact path="/add" component={AddPost} />
 			<Route exact path="/:category" component={CategoryView} />
@@ -19,7 +18,7 @@ const App = () => (
 			<Route exact path="/:category/:postId/edit" component={EditPost} />
 			<Route exact path="/:category/:postId/reply" component={AddComment} />
 			<Route exact path="/:category/:postId/:commentId/edit" component={EditComment} />
-			<Redirect from="/" to="/all"  />
+			<Redirect from="/" to="/all" />
 		</Switch>
 	</div>
 );

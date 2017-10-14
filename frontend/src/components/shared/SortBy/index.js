@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { sortByVoteScore, sortByTimestamp } from '../../../actions/sort';
 
 const SortBy = ({sortByVoteScore, sortByTimestamp}) => (
-	<div>
-		Sort by:
-		<button onClick={sortByVoteScore}>
+	<DropdownButton id="sort" title="Sort by">
+		<MenuItem onClick={sortByVoteScore}>
 			Vote Score
-		</button>
-		<button onClick={sortByTimestamp}>
+		</MenuItem>
+		<MenuItem onClick={sortByTimestamp}>
 			Recent
-		</button>
-	</div>
+		</MenuItem>
+	</DropdownButton>
 );
 
 const mapDispatchToProps = {

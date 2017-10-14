@@ -15,7 +15,12 @@ body {
 	font-family: 'Roboto', sans-serif;
 }
 
+svg {
+	margin: 12px 0;
+}
+
 ol,
 ul {
 	list-style: none;
+	padding: 0;
 }

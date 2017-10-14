@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Grid, Row, Col, Panel } from 'react-bootstrap';
 import * as moment from 'moment';
 import Comment from './Comment';
-import Counter from '../../shared/Counter';
+import PostHeader from './PostHeader';
 import SortBy from '../../shared/SortBy';
 import { getPostById, getVisibleComments } from '../../../reducers';
 import {
@@ -39,42 +39,52 @@ class PostDetailView extends Component {
 
 	render() {
 		const { post, match, comments } = this.props;
+		const { author, timestamp, category } = post;
+		const formattedTime = moment(timestamp).format('MM/D/YYYY hh:mm:ss');
+		const header = (
+			<PostHeader post={post} url={match.url} handlePostDelete={this.handlePostDelete} />
+		);
+		const footer = (
+			<span>{`submitted by ${author} to "${category}" at ${formattedTime}`}</span>
+		);
 
 		return (
-			<div>
-				<div>
-					<Link to={`${match.url}/edit`}>
-						<button>Edit</button>
-					</Link>
-					<button onClick={this.handlePostDelete}>
-						Delete
-					</button>
-					<Link to={`${match.url}/reply`}>
-						<button>Reply</button>
-					</Link>
-				</div>
-				<div className="post">
-					<p>ID: {post.id}</p>
-					<p>Title: {post.title}</p>
-					<p>Author: {post.author}</p>
-					<hr/>
-					<p>{post.body}</p>
-					<p>{moment(post.timestamp).format('MM/D/YYYY hh:mm:ss')}</p>
-					<Counter msg={post} />
-				</div>
-				<p>{`${comments.length} comments`}</p>
-				<SortBy />
-				<ul>
-					{comments.map((comment) => (
-						<Comment
-							key={comment.id}
-							comment={comment}
-							handleDelete={this.handleCommentDelete}
-							url={match.url}
-						/>
-					))}
-				</ul>
-			</div>
+			<Grid>
+				<Row>
+					<Col lg={10}>
+						<Panel bsStyle="primary" header={header} footer={footer}>
+							<p>{post.body}</p>
+						</Panel>
+					</Col>
+				</Row>
+				<Row>
+					<Col lg={10}>
+						<hr />
+					</Col>
+				</Row>
+				<Row>
+					<Col lg={5}>
+						<h4>
+							{`Viewing ${comments.length} comments`}
+						</h4>
+					</Col>
+					<Col lg={5} className="text-right">
+						<SortBy />
+					</Col>
+				</Row>
+				<Row>
+					<Col lg={10}>
+						{comments.map((comment) => (
+							<Comment
+								key={comment.id}
+								comment={comment}
+								handleDelete={this.handleCommentDelete}
+								url={match.url}
+							/>
+						))}
+					</Col>
+				</Row>
+			</Grid>
 		);
 	}
 };

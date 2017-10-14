@@ -5245,6 +5245,16 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-icon-base@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"
+
+react-icons@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.7.tgz#d7860826b258557510dac10680abea5ca23cf650"
+  dependencies:
+    react-icon-base "2.1.0"
+
 react-overlays@^0.7.0:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.2.tgz#03808f80d99dfadd93d67438c619aa55d07b3f80"
@@ -5270,6 +5280,12 @@ react-redux@^5.0.6:
     lodash "^4.2.0"
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
+    prop-types "^15.5.10"
+
+react-router-bootstrap@^0.24.4:
+  version "0.24.4"
+  resolved "https://registry.yarnpkg.com/react-router-bootstrap/-/react-router-bootstrap-0.24.4.tgz#6e89481d8a8979649a0dd4535e4a68df4a3d0b12"
+  dependencies:
     prop-types "^15.5.10"
 
 react-router-dom@^4.2.2:

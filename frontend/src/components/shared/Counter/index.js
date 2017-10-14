@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { FaArrowUp, FaArrowDown } from 'react-icons/lib/fa';
 import {
 	incrementCommentScore,
 	decrementCommentScore
@@ -13,16 +14,15 @@ const Counter = ({ msg, incrementPostScore, decrementPostScore, incrementComment
 	const isPost = ('parentId' in msg) === false;
 	const handleIncrement = isPost ? incrementPostScore : incrementCommentScore;
 	const handleDecrement = isPost ? decrementPostScore : decrementCommentScore;
+	const style = {
+		"display": "flex"
+	};
 
 	return (
-		<div className="vote-score">
-			<button onClick={() => handleIncrement(msg.id)}>
-				+
-			</button>
-			{msg.voteScore}
-			<button onClick={() => handleDecrement(msg.id)}>
-				-
-			</button>
+		<div style={style}>
+			<FaArrowUp onClick={() => handleIncrement(msg.id)} />
+			<h4>{msg.voteScore}</h4>
+			<FaArrowDown onClick={() => handleDecrement(msg.id)} />
 		</div>
 	);
 };

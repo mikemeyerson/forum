@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { getVisibleCategories } from '../../../reducers';
 import { fetchCategories } from '../../../actions/categories';
-import './NavBar.css';
+import './Menu.css';
 
-class NavBar extends Component {
+class Menu extends Component {
 	componentDidMount() {
 		this.props.fetchCategories();
 	}
@@ -15,21 +16,26 @@ class NavBar extends Component {
 			name: 'All',
 			path: 'all'
 		};
-		const activeStyle = {
-			textDecoration: 'none',
-			color: 'black',
-			cursor: 'text'
-		};
+
 		const visibleCategories = [all, ...this.props.categories];
 
 		return (
-			<nav className="links">
-				{visibleCategories.map((cat) => (
-					<NavLink key={cat.path} to={`/${cat.path}`} activeStyle={activeStyle}>
-						{cat.name}{" "}
-					</NavLink>
+			<Navbar>
+				<Navbar.Header>
+					<Navbar.Brand>
+						Forum
+					</Navbar.Brand>
+				</Navbar.Header>
+				<Nav>
+					{visibleCategories.map((cat) => (
+						<LinkContainer key={cat.path} to={`/${cat.path}`}>
+							<NavItem>
+								{cat.name}
+							</NavItem>
+						</LinkContainer>
 					))}
-			</nav>
+				</Nav>
+			</Navbar>
 		);
 	}
 }
@@ -45,4 +51,4 @@ const mapDispatchToProps = {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(NavBar);
+)(Menu);
