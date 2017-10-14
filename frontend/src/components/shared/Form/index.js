@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { isEmpty, includes, some, difference } from 'lodash';
-import CategoryList from '../CategoryList';
+import CategoryList from '../../CategoryList';
 
 class Form extends Component {
 	state = {
@@ -15,7 +15,7 @@ class Form extends Component {
 	componentWillReceiveProps(nextProps) {
 		const post = nextProps.post || {};
 
-		if (this.state.pristine && !isEmpty(post.title)) {
+		if (this.state.pristine && !isEmpty(post.body)) {
 			this.setState({
 				title: post.title,
 				author: post.author,

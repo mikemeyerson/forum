@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import NavBar from '../NavBar';
-import PostList from '../PostList';
-import PostDetails from '../PostDetails';
-import AddPost from '../AddPost';
-import EditPost from '../EditPost';
-import AddComment from '../AddComment';
+import NavBar from './NavBar';
+import CategoryView from '../views/CategoryView';
+import PostDetailView from '../views/PostDetailView';
+import AddPost from '../views/AddPost';
+import EditPost from '../views/EditPost';
+import AddComment from '../views/AddComment';
+import EditComment from '../views/EditComment';
 
 const App = () => (
 	<div>
@@ -13,10 +14,11 @@ const App = () => (
 		<hr />
 		<Switch>
 			<Route exact path="/add" component={AddPost} />
-			<Route exact path="/:category" component={PostList} />
-			<Route exact path="/:category/:postId" component={PostDetails} />
+			<Route exact path="/:category" component={CategoryView} />
+			<Route exact path="/:category/:postId" component={PostDetailView} />
 			<Route exact path="/:category/:postId/edit" component={EditPost} />
 			<Route exact path="/:category/:postId/reply" component={AddComment} />
+			<Route exact path="/:category/:postId/:commentId/edit" component={EditComment} />
 			<Redirect from="/" to="/all"  />
 		</Switch>
 	</div>

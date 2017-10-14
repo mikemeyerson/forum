@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
-import { addPost } from '../../actions/posts';
-import Form from '../Form';
+import { addPost } from '../../../actions/posts';
+import Form from '../../shared/Form';
 
 const AddPost = ({ addPost, history }) => {
 

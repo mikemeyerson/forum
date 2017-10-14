@@ -51,14 +51,13 @@ const makeDeleteRequest = (path) =>
 		return json;
 	});
 
-// TODO: Use fetchPostById for EditPost and PostDetails
-
 export const fetchCategories = () => makeGetRequest('categories');
 
 // Posts API
 
 export const fetchPosts = () => makeGetRequest('posts');
 
+// TODO: Can optionally use for EditPost and PostDetails
 export const fetchPostById = (postId) => makeGetRequest(`posts/${postId}`);
 
 export const fetchPostsByCategory = (category) => makeGetRequest(`${category}/posts`);

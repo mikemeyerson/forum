@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
-import { addComment } from '../../actions/comments';
-import Form from '../Form';
+import { addComment } from '../../../actions/comments';
+import Form from '../../shared/Form';
 
 const AddComment = ({ addComment, history, match }) => {
 
 	const disabledFields = [
+		'title',
 		'category'
 	];
 

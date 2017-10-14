@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import CategoryList from '../CategoryList';
+import CategoryList from '../../CategoryList';
 import './NavBar.css';
 
 const activeStyle = {

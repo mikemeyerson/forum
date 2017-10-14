@@ -1,22 +1,32 @@
 import { combineReducers } from 'redux';
+import sortMethods from '../sort-methods';
 import categoriesReducer from './categories';
 import { getCategories } from './categories';
 import postsReducer from './posts';
 import * as postSelectors from './posts';
 import commentsReducer from './comments';
-import { getComments } from './comments';
+import * as commentSelectors from './comments';
+import sortReducer from './sort';
 
-// TODO: Remove this once we fetch individual post
+
+export const getCommentById = (state, commentId) => {
+	return commentSelectors.getCommentById(state.comments, commentId);
+};
+
+export const getVisibleComments = (state, postId) => {
+	return commentSelectors
+		.getComments(state.comments, postId)
+		.sort(sortMethods[state.sort]);
+};
+
 export const getPostById = (state, id) => {
 	return postSelectors.getPostById(state.posts, id);
 };
 
-export const getVisibleComments = (state, postId) => {
-	return getComments(state.comments, postId);
-};
-
 export const getVisiblePosts = (state, category) => {
-	return postSelectors.getPosts(state.posts, category);
+	return postSelectors
+		.getPosts(state.posts, category)
+		.sort(sortMethods[state.sort]);
 };
 
 export const getIsFetching = (state) => {
@@ -30,5 +40,6 @@ export const getVisibleCategories = (state) => {
 export default combineReducers({
 	comments: commentsReducer,
 	posts: postsReducer,
-	categories: categoriesReducer
+	categories: categoriesReducer,
+	sort: sortReducer
 });

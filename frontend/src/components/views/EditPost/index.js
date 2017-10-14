@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { editPost, fetchPosts } from '../../actions/posts';
-import { getPostById } from '../../reducers';
-import Form from '../Form';
+import { editPost, fetchPosts } from '../../../actions/posts';
+import { getPostById } from '../../../reducers';
+import Form from '../../shared/Form';
 
 class EditPost extends Component {
 	componentDidMount() {
@@ -13,10 +13,11 @@ class EditPost extends Component {
 		const { editPost, history, post } = this.props;
 
 		editPost({
-			...modifiedPost,
-			id: post.id
+			...post,
+			...modifiedPost
 		});
-		history.push('/');
+
+		history.push(`/${post.category}`);
 	};
 
 	render() {
