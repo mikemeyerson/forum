@@ -44,6 +44,7 @@ class CategoryView extends Component {
 
 		return (
 			<div>
+				<Link to="/add"><h4>Add Post</h4></Link>
 				<SortBy />
 				{isFetching && !posts.length
 					? (<p>Loading posts...</p>)

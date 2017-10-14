@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { isEmpty, includes, some, difference } from 'lodash';
-import CategoryList from '../../CategoryList';
+import CategoryDropdown from './CategoryDropdown';
 
 class Form extends Component {
 	state = {
@@ -53,17 +53,6 @@ class Form extends Component {
 		onSubmit(post);
 	};
 
-	renderCategories = (categories) => (
-		<select value={this.state.category} onChange={this.setValue('category')}>
-			<option disabled value="">Choose one...</option>
-			{categories.map((cat) => (
-				<option key={cat.path} value={cat.path}>
-					{cat.name}
-				</option>
-			))}
-		</select>
-	);
-
 	render() {
 		const { disabledFields } = this.props;
 		const numBodyRows = 8;
@@ -97,8 +86,8 @@ class Form extends Component {
 					/>
 				)}
 				{!includes(disabledFields, 'category') && (
-					<CategoryList
-						render={this.renderCategories}
+					<CategoryDropdown
+						handleChange={this.setValue('category')}
 						active={this.state.category}
 					/>
 				)}
