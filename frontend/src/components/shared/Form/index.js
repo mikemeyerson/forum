@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { isEmpty, includes, some, difference } from 'lodash';
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap';
 import CategoryDropdown from './CategoryDropdown';
 
 class Form extends Component {
@@ -33,10 +34,8 @@ class Form extends Component {
 		});
 	};
 
-	handleSubmit = (event) => {
-		event.preventDefault();
-
-		const { onSubmit, disabledFields } = this.props;
+	isFormInvalid = () => {
+		const { disabledFields } = this.props;
 		const { title, author, body, category } = this.state;
 		const post = {
 			title,
@@ -44,11 +43,23 @@ class Form extends Component {
 			body,
 			category
 		};
+
 		const fieldsToValidate = difference(Object.keys(post), disabledFields);
 
-		if (some(fieldsToValidate, (field) => isEmpty(this.state[field]))) {
-			return;
-		}
+		return some(fieldsToValidate, (field) => isEmpty(this.state[field]));
+	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+
+		const { onSubmit } = this.props;
+		const { title, author, body, category } = this.state;
+		const post = {
+			title,
+			author,
+			body,
+			category
+		};
 
 		onSubmit(post);
 	};
@@ -60,40 +71,53 @@ class Form extends Component {
 
 		return (
 			<form>
-				{!includes(disabledFields, 'title') && (
-					<input
-						type="text"
-						placeholder="Title"
-						onChange={this.setValue('title')}
-						value={this.state.title}
-					/>
-				)}
-				{!includes(disabledFields, 'author') && (
-					<input
-						type="text"
-						placeholder="Author"
-						onChange={this.setValue('author')}
-						value={this.state.author}
-					/>
-				)}
-				{!includes(disabledFields, 'body') && (
-					<textarea
-						rows={numBodyRows}
-						cols={numBodyCols}
-						placeholder="Write message here..."
-						onChange={this.setValue('body')}
-						value={this.state.body}
-					/>
-				)}
-				{!includes(disabledFields, 'category') && (
-					<CategoryDropdown
-						handleChange={this.setValue('category')}
-						active={this.state.category}
-					/>
-				)}
-				<button type="submit" onClick={this.handleSubmit}>
-					Submit
-				</button>
+					{!includes(disabledFields, 'title') && (
+						<FormGroup controlId="title">
+							<ControlLabel>Title</ControlLabel>
+							<FormControl
+								type="text"
+								value={this.state.title}
+								onChange={this.setValue('title')}
+							/>
+						</FormGroup>
+					)}
+					{!includes(disabledFields, 'author') && (
+						<FormGroup controlId="author">
+							<ControlLabel>Author</ControlLabel>
+							<FormControl
+								type="text"
+								value={this.state.author}
+								onChange={this.setValue('author')}
+							/>
+						</FormGroup>
+					)}
+					{!includes(disabledFields, 'body') && (
+						<FormGroup controlId="body">
+							<ControlLabel>Message</ControlLabel>
+							<FormControl
+								componentClass="textarea"
+								rows={numBodyRows}
+								cols={numBodyCols}
+								onChange={this.setValue('body')}
+								value={this.state.body}
+							/>
+						</FormGroup>
+					)}
+					{!includes(disabledFields, 'category') && (
+						<CategoryDropdown
+							handleChange={this.setValue('category')}
+							active={this.state.category}
+						/>
+					)}
+					<Button
+						type="submit"
+						bsStyle="primary"
+						bsSize="large"
+						onClick={this.handleSubmit}
+						disabled={this.isFormInvalid()}
+					>
+						Submit
+					</Button>
 			</form>
 		);
 	}

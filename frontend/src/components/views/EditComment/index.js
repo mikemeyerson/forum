@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { fetchCommentById, editComment } from '../../../actions/comments';
 import { getCommentById } from '../../../reducers';
 import Form from '../../shared/Form';
@@ -31,11 +32,17 @@ class EditComment extends Component {
 		];
 
 		return (
-			<Form
-				post={comment}
-				onSubmit={this.submitForm}
-				disabledFields={disabledFields}
-			/>
+			<Grid>
+				<Row>
+					<Col lg={8}>
+						<Form
+							post={comment}
+							onSubmit={this.submitForm}
+							disabledFields={disabledFields}
+						/>
+					</Col>
+				</Row>
+			</Grid>
 		);
 	}
 }

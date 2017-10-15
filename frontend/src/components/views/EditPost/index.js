@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { editPost, fetchPosts } from '../../../actions/posts';
 import { getPostById } from '../../../reducers';
 import Form from '../../shared/Form';
@@ -17,7 +18,7 @@ class EditPost extends Component {
 			...modifiedPost
 		});
 
-		history.push(`/${post.category}`);
+		history.push(`/${post.category}/${post.id}`);
 	};
 
 	render() {
@@ -28,11 +29,17 @@ class EditPost extends Component {
 		];
 
 		return (
-			<Form
-				post={post}
-				onSubmit={this.submitForm}
-				disabledFields={disabledFields}
-			/>
+			<Grid>
+				<Row>
+					<Col lg={8}>
+						<Form
+							post={post}
+							onSubmit={this.submitForm}
+							disabledFields={disabledFields}
+						/>
+					</Col>
+				</Row>
+			</Grid>
 		);
 	}
 }

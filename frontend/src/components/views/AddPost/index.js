@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { addPost } from '../../../actions/posts';
 import Form from '../../shared/Form';
 
@@ -19,7 +20,13 @@ const AddPost = ({ addPost, history }) => {
 	};
 
 	return (
-		<Form onSubmit={submitForm} />
+		<Grid>
+			<Row>
+				<Col lg={8}>
+					<Form onSubmit={submitForm} />
+				</Col>
+			</Row>
+		</Grid>
 	);
 }
 

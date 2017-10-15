@@ -1,30 +1,15 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Panel, ButtonGroup, Button } from 'react-bootstrap';
-import Counter from '../../../shared/Counter';
+import { Panel } from 'react-bootstrap';
+import MessageHeader from '../MessageHeader';
 
 const Comment = ({comment, url, handleDelete}) => {
-
-	const onDeleteClick = () => {
-		handleDelete(comment.id);
-	};
+	const header = (
+		<MessageHeader msg={comment} url={url} handleDelete={handleDelete} />
+	);
 
 	return (
-		<Panel>
-			<ButtonGroup>
-				<LinkContainer to={`${url}/${comment.id}/edit`}>
-					<Button>Edit</Button>
-				</LinkContainer>
-				<Button onClick={onDeleteClick}>
-					Delete
-				</Button>
-			</ButtonGroup>
-			<hr />
-			<p>ID: {comment.id}</p>
-			<p>Author: {comment.author}</p>
-			<hr/>
+		<Panel header={header}>
 			<p>{comment.body}</p>
-			<Counter msg={comment} />
 		</Panel>
 	);
 }
