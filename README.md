@@ -21,7 +21,7 @@ Forum is an anonymous message board where users can post and comment about happe
 ## Contributing
 
 ### Server Code
-Forum's server-side logic is a fork of project starter code from Udacity's React Nanodegree Program. See [https://github.com/udacity/reactnd-project-readable-starter](that repo) for how to contribute.
+Forum's server-side logic is a fork of project starter code from Udacity's React Nanodegree Program. See [that repo](https://github.com/udacity/reactnd-project-readable-starter) for how to contribute.
 
 ### Frontend Code
 Feel free to make a pull request or raise an issue.
