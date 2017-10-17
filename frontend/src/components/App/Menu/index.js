@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getVisibleCategories } from '../../../reducers';
 import { fetchCategories } from '../../../actions/categories';
-import './Menu.css';
 
 class Menu extends Component {
 	componentDidMount() {
@@ -12,24 +12,17 @@ class Menu extends Component {
 	}
 
 	render() {
-		const all = {
-			name: 'All',
-			path: 'all'
-		};
-
-		const visibleCategories = [all, ...this.props.categories];
-
 		return (
 			<Navbar>
 				<Navbar.Header>
 					<Navbar.Brand>
-						Forum
+						<Link to="/">Forum</Link>
 					</Navbar.Brand>
 				</Navbar.Header>
 				<Nav>
-					{visibleCategories.map((cat) => (
+					{this.props.categories.map((cat, idx) => (
 						<LinkContainer key={cat.path} to={`/${cat.path}`}>
-							<NavItem>
+							<NavItem eventKey={idx}>
 								{cat.name}
 							</NavItem>
 						</LinkContainer>
