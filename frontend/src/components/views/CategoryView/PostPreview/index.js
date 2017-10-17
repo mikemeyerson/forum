@@ -24,15 +24,19 @@ class PostPreview extends Component {
 			category
 		} = post;
 		const formattedTime = moment(timestamp).format('MM/D/YYYY hh:mm:ss');
+		const header = (
+			<div style={{display: "flex"}}>
+				<Counter msg={post} />
+				<Link to={`${category}/${id}`}>
+					<h4 style={{marginLeft: "15px"}}>{title}</h4>
+				</Link>
+			</div>
+		);
 
 		return (
-			<Panel>
-				<Link to={`${category}/${id}`}>
-					<h4>{title}</h4>
-				</Link>
+			<Panel bsStyle="primary" header={header}>
 				<p>{`submitted by ${author} at ${formattedTime}`}</p>
-				<p>{comments.length} comments</p>
-				<Counter msg={post} />
+				<p>{`${comments.length} comments`}</p>
 			</Panel>
 		);
 	}

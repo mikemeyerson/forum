@@ -27,6 +27,8 @@ const Counter = ({ msg, incrementPostScore, decrementPostScore, incrementComment
 	);
 };
 
+// TODO: Could place logic to map comment/post increment and decrement
+// handlers here instead
 const mapDispatchToProps = {
 	incrementPostScore,
 	decrementPostScore,

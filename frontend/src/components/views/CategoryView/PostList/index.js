@@ -6,17 +6,17 @@ import SortBy from '../../../shared/SortBy';
 
 const PostList = ({ posts }) => (
 	<Grid>
-		<Row>
-			<Col lg={6}>
+		<Row style={{paddingBottom: "2rem"}}>
+			<Col lg={5}>
 				<AddPostButton />
 			</Col>
-			<Col lg={6} className="text-right">
+			<Col lg={5} className="text-right">
 				<SortBy />
 			</Col>
 		</Row>
 		{posts.map((post) => (
 			<Row key={post.id}>
-				<Col lg={12}>
+				<Col lg={10}>
 					<PostPreview post={post} />
 				</Col>
 			</Row>

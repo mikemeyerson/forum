@@ -7,7 +7,6 @@ const MessageHeader = ({ msg, url, handleDelete }) => {
 	const isPost = ('parentId' in msg) === false;
 	const editUrl = isPost ? '' : `/${msg.id}`;
 	const onDeleteClick = () => {
-		console.info('yup');
 		handleDelete(msg.id);
 	};
 
