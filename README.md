@@ -17,3 +17,11 @@ Forum is an anonymous message board where users can post and comment about happe
     - `cd frontend`
     - `npm install` or `yarn`
     - `npm start` or `yarn start`
+
+## Contributing
+
+### Server Code
+Forum's server-side logic is a fork of project starter code from Udacity's React Nanodegree Program. See [https://github.com/udacity/reactnd-project-readable-starter](that repo) for how to contribute.
+
+### Frontend Code
+Feel free to make a pull request or raise an issue.
