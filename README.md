@@ -1,22 +1,27 @@
-# Readable API Server
+# Forum
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+Forum is an anonymous message board where users can post and comment about happenings in the world of React & Redux.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## How to run
 
-## Start Developing
+* Clone this repo
+    - `git clone https://github.com/mikemeyerson/forum.git`
 
-To get started developing right away:
+* Open two different windows on your command line
 
-* Install and start the API server
+* Window 1: Install and start the API server
     - `cd api-server`
     - `npm install`
     - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
+* Window 2: Install and run the app
     - `cd frontend`
-    - `npm start`
+    - `npm install` or `yarn`
+    - `npm start` or `yarn start`
 
-## API Server
+## Contributing
 
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+### Server Code
+Forum's server-side logic is a fork of project starter code from Udacity's React Nanodegree Program. See [that repo](https://github.com/udacity/reactnd-project-readable-starter) for how to contribute.
+
+### Frontend Code
+Feel free to make a pull request or raise an issue.
