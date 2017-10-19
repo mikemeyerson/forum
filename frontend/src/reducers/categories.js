@@ -1,7 +1,7 @@
 import { capitalize } from 'lodash';
 import {
 	FETCH_CATEGORIES_SUCCESS
-} from '../actions/categories';
+} from '../actions/types';
 
 const categories = (state = [], action) => {
 	switch (action.type) {

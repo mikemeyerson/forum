@@ -6,7 +6,7 @@ import {
 	INCREMENT_COMMENT_SCORE_SUCCESS,
 	DECREMENT_COMMENT_SCORE_SUCCESS,
 	DELETE_COMMENT_SUCCESS
-} from '../actions/comments';
+} from '../actions/types';
 
 const byId = (state = {}, action) => {
 	switch (action.type) {

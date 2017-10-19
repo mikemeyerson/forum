@@ -7,7 +7,7 @@ import {
 	DECREMENT_POST_SCORE_SUCCESS,
 	EDIT_POST_SUCCESS,
 	DELETE_POST_SUCCESS,
-} from '../actions/posts';
+} from '../actions/types';
 
 const byId = (state = {}, action) => {
 	switch (action.type) {

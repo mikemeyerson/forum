@@ -1,7 +1,7 @@
 import {
 	SORT_BY_VOTE_SCORE,
 	SORT_BY_TIMESTAMP
-} from '../actions/sort';
+} from '../actions/types';
 
 const sort = (state = 'byVoteScore', action) => {
 	switch (action.type) {
