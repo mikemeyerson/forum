@@ -1,5 +1,7 @@
-export const SORT_BY_VOTE_SCORE = 'SORT_BY_VOTE_SCORE';
-export const SORT_BY_TIMESTAMP = 'SORT_BY_TIMESTAMP';
+import {
+	SORT_BY_VOTE_SCORE,
+	SORT_BY_TIMESTAMP
+} from './types';
 
 export const sortByVoteScore = () => ({
 	type: SORT_BY_VOTE_SCORE

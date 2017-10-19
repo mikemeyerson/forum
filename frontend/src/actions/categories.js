@@ -1,7 +1,8 @@
 import * as api from '../api';
-
-export const FETCH_CATEGORIES_REQUEST = 'FETCH_CATEGORIES_REQUEST';
-export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS';
+import {
+	FETCH_CATEGORIES_REQUEST,
+	FETCH_CATEGORIES_SUCCESS
+} from './types';
 
 export const fetchCategories = () => (dispatch) => {
 	dispatch({

@@ -4,6 +4,7 @@ import { Panel } from 'react-bootstrap';
 import * as moment from 'moment';
 import MessageHeader from '../MessageHeader';
 import { getVisibleComments } from '../../../reducers';
+import { deletePost } from '../../../actions/posts';
 import { fetchCommentsByPostId } from '../../../actions/comments';
 
 class Post extends Component {
@@ -12,6 +13,12 @@ class Post extends Component {
 
 		fetchComments(post.id);
 	}
+
+	handlePostDelete = (id) => {
+		const { deletePost } = this.props;
+
+		deletePost(id);
+	};
 
 	render() {
 		const { post, comments } = this.props;
@@ -47,6 +54,7 @@ const mapStateToProps = (state, { post }) => ({
 });
 
 const mapDispatchToProps = {
+	deletePost,
 	fetchComments: fetchCommentsByPostId
 };
 
