@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Panel } from 'react-bootstrap';
 import * as moment from 'moment';
-import Counter from '../../../shared/Counter';
-import { getVisibleComments } from '../../../../reducers';
-import { fetchCommentsByPostId } from '../../../../actions/comments';
+import MessageHeader from '../MessageHeader';
+import { getVisibleComments } from '../../../reducers';
+import { fetchCommentsByPostId } from '../../../actions/comments';
 
-class PostPreview extends Component {
+class Post extends Component {
 	componentDidMount() {
 		const { fetchComments, post } = this.props;
 
@@ -18,19 +17,20 @@ class PostPreview extends Component {
 		const { post, comments } = this.props;
 		const {
 			id,
-			title,
 			author,
 			timestamp,
 			category
 		} = post;
 		const formattedTime = moment(timestamp).format('MM/D/YYYY hh:mm:ss');
+		const postUrl = `${category}/${id}`;
 		const header = (
-			<div style={{display: "flex"}}>
-				<Counter msg={post} />
-				<Link to={`${category}/${id}`}>
-					<h4 style={{marginLeft: "15px"}}>{title}</h4>
-				</Link>
-			</div>
+			<MessageHeader
+				msg={post}
+				titleUrl={postUrl}
+				editUrl={`${postUrl}/edit`}
+				replyUrl={`${postUrl}/reply`}
+				handleDelete={this.handlePostDelete}
+			/>
 		);
 
 		return (
@@ -53,4 +53,4 @@ const mapDispatchToProps = {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(PostPreview);
+)(Post);

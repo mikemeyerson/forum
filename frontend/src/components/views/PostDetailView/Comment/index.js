@@ -1,10 +1,14 @@
 import React from 'react';
 import { Panel } from 'react-bootstrap';
-import MessageHeader from '../MessageHeader';
+import MessageHeader from '../../../shared/MessageHeader';
 
 const Comment = ({comment, url, handleDelete}) => {
 	const header = (
-		<MessageHeader msg={comment} url={url} handleDelete={handleDelete} />
+		<MessageHeader
+			msg={comment}
+			editUrl={`${url}/${comment.id}/edit`}
+			handleDelete={handleDelete}
+		/>
 	);
 
 	return (

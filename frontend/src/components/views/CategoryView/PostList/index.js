@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import AddPostButton from '../AddPostButton';
-import PostPreview from '../PostPreview';
+import Post from '../../../shared/Post';
 import SortBy from '../../../shared/SortBy';
 
 const PostList = ({ posts }) => (
@@ -17,7 +17,7 @@ const PostList = ({ posts }) => (
 		{posts.map((post) => (
 			<Row key={post.id}>
 				<Col lg={10}>
-					<PostPreview post={post} />
+					<Post post={post} />
 				</Col>
 			</Row>
 		))}

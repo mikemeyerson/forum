@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { Grid, Row, Col, Panel } from 'react-bootstrap';
+import { isEmpty } from 'lodash';
 import * as moment from 'moment';
 import CommentList from './CommentList';
-import MessageHeader from './MessageHeader';
+import MessageHeader from '../../shared/MessageHeader';
 import { getPostById } from '../../../reducers';
 import {
 	deletePost,
@@ -26,12 +28,18 @@ class PostDetailView extends Component {
 
 	render() {
 		const { post, match } = this.props;
+
+		if (post.deleted || isEmpty(post)) {
+			return <Redirect to="/" />;
+		}
+
 		const { author, timestamp, category } = post;
 		const formattedTime = moment(timestamp).format('MM/D/YYYY hh:mm:ss');
 		const header = (
 			<MessageHeader
 				msg={post}
-				url={match.url}
+				editUrl={`${match.url}/edit`}
+				replyUrl={`${match.url}/reply`}
 				handleDelete={this.handlePostDelete}
 			/>
 		);
